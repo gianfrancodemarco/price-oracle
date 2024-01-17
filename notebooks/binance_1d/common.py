@@ -282,6 +282,20 @@ def register_training_experiment(
             })
 
 
+        for days in [len(data), 90, 30, 7]:
+            mse = mean_squared_error(data[:days], predictions[:days])
+            rmse = sqrt(mse)
+            mape = mean_absolute_percentage_error(data[:days], predictions[:days])
+            print(f"Metrics for {days} days: {coin} MSE: {mse}, RMSE: {rmse}", f"MAPE: {mape}")
+
+            suffix = 'all' if days == len(data) else days
+            mlflow.log_metrics({
+                f'mse_{suffix}_v2': mse,
+                f'rmse_{suffix}_v2': rmse,
+                f'mape_{suffix}_v2': mape
+            })
+
+
 def objective(trial, data, coins, output_shape = None):
     """
     Define an objective function to be minimized by using Optuna.

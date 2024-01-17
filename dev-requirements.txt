@@ -8,9 +8,10 @@ pandas
 matplotlib
 seaborn
 fastdtw
-mlflow
+mlflow==2.7.1
 scikit-learn-extra
 pyspark
 tensorflow==2.13.0
 statsmodels
 optuna
+dvc==2.58.2
